@@ -70,9 +70,13 @@ export function SmartLogo({ src, alt, className = "", containerClassName = "" }:
           } else {
             // For white/black backgrounds, just keep the original foreground pixel colors
             
-            // Only update Surbhika logo's dark text to white
-            if (alt.toLowerCase().includes("surbhika")) {
-              if (r < 90 && g < 90 && b < 90) {
+            // Strictly target only the text ("Surbhika", "Check", "24") to pure white
+            if (alt.toLowerCase().includes("surbhika") || alt.toLowerCase().includes("checkcars24")) {
+              const maxColor = Math.max(r, g, b);
+              const minColor = Math.min(r, g, b);
+              
+              // If pixel is dark OR mostly grey (low saturation, meaning it's black/grey text and NOT a colorful icon)
+              if ((r < 140 && g < 140 && b < 140) || (maxColor < 190 && maxColor - minColor < 40)) {
                 data[i] = 255;
                 data[i + 1] = 255;
                 data[i + 2] = 255;
