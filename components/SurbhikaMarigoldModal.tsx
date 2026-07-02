@@ -138,7 +138,7 @@ export function SurbhikaMarigoldModal({ isOpen, onClose }: CampaignModalProps) {
                   {/* Media Wrapper */}
                   <div className="relative w-full h-full overflow-hidden rounded-2xl">
                     <video
-                      src="/all-work/3d-product-visualization/01-surbhika-marigold-petals.mp4"
+                      src="/all-work/3D Product Visualization/01 SURBHIKA MARRIGOLD PETALS VIDEO WEBSITE.mp4"
                       autoPlay
                       muted
                       controls

@@ -9,6 +9,8 @@ import { GopalSnacksModal } from "@/components/GopalSnacksModal";
 import { MahalaxmiMasalaModal } from "@/components/MahalaxmiMasalaModal";
 import { DtcStillWatersModal } from "@/components/DtcStillWatersModal";
 import { DaburLalTailModal } from "@/components/DaburLalTailModal";
+import { SurbhikaMarigoldModal } from "@/components/SurbhikaMarigoldModal";
+import { SummercoolBigBModal } from "@/components/SummercoolBigBModal";
 
 // Attempt to load dynamic data, fallback to empty array
 let dynamicData = { categories: [] as any[] };
@@ -58,6 +60,22 @@ const legacyProjects = [
     category: "Brand Films",
     bg: "linear-gradient(160deg, #1a100a 0%, #100804 40%, #080706 100%)",
     preview: "/selected-work/dabur lal tail/preview.mp4",
+    isLegacy: true,
+  },
+  {
+    id: 7,
+    name: "Surbhika Marigold",
+    category: "3D Product Visualization",
+    bg: "linear-gradient(160deg, #1a100a 0%, #100804 40%, #080706 100%)",
+    preview: "/all-work/3D Product Visualization/01 SURBHIKA MARRIGOLD PETALS VIDEO WEBSITE.mp4",
+    isLegacy: true,
+  },
+  {
+    id: 8,
+    name: "Summercool Big-B",
+    category: "3D Product Visualization",
+    bg: "linear-gradient(160deg, #1a100a 0%, #100804 40%, #080706 100%)",
+    preview: "/all-work/3D Product Visualization/02 SUMMERCOOL BIG-B JUMBO COOLER VIDEO_HIGH_RENDER.mp4",
     isLegacy: true,
   },
 ];
@@ -228,6 +246,8 @@ export default function WorksPage() {
       <MahalaxmiMasalaModal isOpen={activeLegacyId === 2} onClose={() => setActiveLegacyId(null)} />
       <DtcStillWatersModal isOpen={activeLegacyId === 5} onClose={() => setActiveLegacyId(null)} />
       <DaburLalTailModal isOpen={activeLegacyId === 6} onClose={() => setActiveLegacyId(null)} />
+      <SurbhikaMarigoldModal isOpen={activeLegacyId === 7} onClose={() => setActiveLegacyId(null)} />
+      <SummercoolBigBModal isOpen={activeLegacyId === 8} onClose={() => setActiveLegacyId(null)} />
     </div>
   );
 }
