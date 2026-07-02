@@ -135,7 +135,7 @@ export function SmartLogo({ src, alt, className = "", containerClassName = "" }:
       <img 
         src={dataUrl} 
         alt={alt} 
-        className={`w-auto h-full object-contain ${className}`}
+        className={`w-full h-full object-contain ${className}`}
       />
     </div>
   );

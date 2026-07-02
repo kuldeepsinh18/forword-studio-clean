@@ -4,6 +4,7 @@ import { motion, cubicBezier } from "framer-motion";
 import { SmartLogo } from "./SmartLogo";
 
 const allBrands = [
+  { name: "CheckCars24", src: "/logos/CheckCars24.png" },
   { name: "LEDVANCE", src: "/logos/LEDVANCE.png" },
   { name: "SUMMERCOOL", src: "/logos/SUMMERCOOL.png" },
   { name: "DTC Still Waters", src: "/logos/DTC Still Waters.png" },
