@@ -15,7 +15,7 @@ export function HeroSection() {
       </div>
 
       {/* Scroll Down */}
-      <div className="absolute right-5 lg:right-[4.5rem] bottom-6 lg:bottom-[25px] text-white text-[11px] font-medium tracking-[0.05em]">
+      <div className="hidden md:block absolute right-5 lg:right-[4.5rem] bottom-6 lg:bottom-[25px] text-white text-[11px] font-medium tracking-[0.05em]">
         SCROLL DOWN
       </div>
     </section>
