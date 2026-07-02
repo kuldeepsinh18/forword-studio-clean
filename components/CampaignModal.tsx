@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
 
 interface CampaignModalProps {
@@ -64,6 +64,7 @@ const itemVariants: Variants = {
 };
 
 export function CampaignModal({ isOpen, onClose }: CampaignModalProps) {
+  const [selectedMedia, setSelectedMedia] = useState<{ url: string; isVideo: boolean } | null>(null);
   // Prevent body scrolling when modal is open
   useEffect(() => {
     if (isOpen) {
@@ -135,7 +136,8 @@ export function CampaignModal({ isOpen, onClose }: CampaignModalProps) {
                   <img 
                     src="/campaigns/ledvance/post-01.jpg" 
                     alt="LEDVANCE Hero Post" 
-                    className="w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-[1.03]"
+                    onClick={() => setSelectedMedia({ url: "/campaigns/ledvance/post-01.jpg", isVideo: false })}
+                    className="w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-[1.03] cursor-pointer"
                     onError={(e) => {
                       (e.target as HTMLImageElement).src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="100%25" height="100%25" viewBox="0 0 800 400"%3E%3Crect width="800" height="400" fill="%23111"/%3E%3Ctext x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" fill="%23555" font-family="sans-serif" font-size="24"%3EUpload post-01.jpg to public/campaigns/ledvance/%3C/text%3E%3C/svg%3E';
                     }}
@@ -150,7 +152,8 @@ export function CampaignModal({ isOpen, onClose }: CampaignModalProps) {
                     <img 
                       src={`/campaigns/ledvance/post-0${num}.jpg`} 
                       alt={`LEDVANCE Post 0${num}`} 
-                      className="w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-[1.03]"
+                      className="w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-[1.03] cursor-pointer"
+                      onClick={() => setSelectedMedia({ url: `/campaigns/ledvance/post-0${num}.jpg`, isVideo: false })}
                       onError={(e) => {
                         (e.target as HTMLImageElement).src = `data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="100%25" height="100%25" viewBox="0 0 400 400"%3E%3Crect width="400" height="400" fill="%23111"/%3E%3Ctext x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" fill="%23555" font-family="sans-serif" font-size="16"%3Epost-0${num}.jpg%3C/text%3E%3C/svg%3E`;
                       }}
@@ -166,7 +169,8 @@ export function CampaignModal({ isOpen, onClose }: CampaignModalProps) {
                     <img 
                       src={`/campaigns/ledvance/post-0${num}.jpg`} 
                       alt={`LEDVANCE Post 0${num}`} 
-                      className="w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-[1.03]"
+                      className="w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-[1.03] cursor-pointer"
+                      onClick={() => setSelectedMedia({ url: `/campaigns/ledvance/post-0${num}.jpg`, isVideo: false })}
                       onError={(e) => {
                         (e.target as HTMLImageElement).src = `data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="100%25" height="100%25" viewBox="0 0 400 500"%3E%3Crect width="400" height="500" fill="%23111"/%3E%3Ctext x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" fill="%23555" font-family="sans-serif" font-size="16"%3Epost-0${num}.jpg%3C/text%3E%3C/svg%3E`;
                       }}
@@ -182,7 +186,8 @@ export function CampaignModal({ isOpen, onClose }: CampaignModalProps) {
                     <img 
                       src={`/campaigns/ledvance/post-0${num}.jpg`} 
                       alt={`LEDVANCE Post 0${num}`} 
-                      className="w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-[1.03]"
+                      className="w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-[1.03] cursor-pointer"
+                      onClick={() => setSelectedMedia({ url: `/campaigns/ledvance/post-0${num}.jpg`, isVideo: false })}
                       onError={(e) => {
                         (e.target as HTMLImageElement).src = `data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="100%25" height="100%25" viewBox="0 0 400 400"%3E%3Crect width="400" height="400" fill="%23111"/%3E%3Ctext x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" fill="%23555" font-family="sans-serif" font-size="16"%3Epost-0${num}.jpg%3C/text%3E%3C/svg%3E`;
                       }}
@@ -193,14 +198,17 @@ export function CampaignModal({ isOpen, onClose }: CampaignModalProps) {
 
               {/* Section 6: Full Width Video */}
               <motion.div variants={itemVariants} className="w-full">
-                <div className="relative w-full aspect-[16/9] bg-white/5 rounded-xl overflow-hidden">
+                <div 
+                  className="relative w-full aspect-[16/9] bg-white/5 rounded-xl overflow-hidden cursor-pointer"
+                  onClick={() => setSelectedMedia({ url: "/campaigns/ledvance/video.mp4", isVideo: true })}
+                >
                   <video 
                     src="/campaigns/ledvance/video.mp4"
                     autoPlay
                     muted
                     loop
                     playsInline
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover pointer-events-none"
                   />
                   {/* Fallback text if video is missing */}
                   <div className="absolute inset-0 flex items-center justify-center -z-10 bg-[#111]">
@@ -211,6 +219,56 @@ export function CampaignModal({ isOpen, onClose }: CampaignModalProps) {
 
             </motion.div>
           </motion.div>
+
+          {/* Inline Media Preview Overlay */}
+          <AnimatePresence>
+            {selectedMedia && (
+              <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 md:p-8">
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  onClick={() => setSelectedMedia(null)}
+                  className="absolute inset-0 bg-black/95 backdrop-blur-xl cursor-pointer"
+                />
+                
+                <motion.button
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  onClick={() => setSelectedMedia(null)}
+                  className="absolute top-4 right-4 md:top-8 md:right-8 z-50 flex items-center justify-center w-12 h-12 rounded-full bg-white/10 hover:bg-white text-white hover:text-black transition-colors"
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                  </svg>
+                </motion.button>
+
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  className="relative z-10 w-full max-w-[90vw] md:max-w-[80vw] h-[80vh] flex items-center justify-center"
+                >
+                  {selectedMedia.isVideo ? (
+                    <video 
+                      src={selectedMedia.url} 
+                      autoPlay 
+                      controls 
+                      className="max-w-full max-h-full rounded-xl object-contain outline-none" 
+                    />
+                  ) : (
+                    <img 
+                      src={selectedMedia.url} 
+                      alt="Preview" 
+                      className="max-w-full max-h-full rounded-xl object-contain" 
+                    />
+                  )}
+                </motion.div>
+              </div>
+            )}
+          </AnimatePresence>
         </div>
       )}
     </AnimatePresence>

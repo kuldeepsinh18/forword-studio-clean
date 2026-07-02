@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
 
 interface Project {
@@ -63,6 +63,7 @@ const itemVariants: Variants = {
 };
 
 export function UnifiedProjectModal({ isOpen, onClose, project }: UnifiedProjectModalProps) {
+  const [selectedMedia, setSelectedMedia] = useState<{ url: string; isVideo: boolean } | null>(null);
   useEffect(() => {
     if (isOpen) {
       document.documentElement.style.overflow = "hidden";
@@ -143,7 +144,8 @@ export function UnifiedProjectModal({ isOpen, onClose, project }: UnifiedProject
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true, margin: "-40px" }}
-                    className="w-[90vw] h-[85vh] lg:h-[90vh] max-w-[1800px] bg-black rounded-2xl overflow-hidden relative shadow-[0_30px_80px_rgba(0,0,0,0.8)] z-10"
+                    onClick={() => setSelectedMedia({ url: project.media[0], isVideo: project.media[0].endsWith('.mp4') })}
+                    className="w-[90vw] h-[85vh] lg:h-[90vh] max-w-[1800px] bg-black rounded-2xl overflow-hidden relative shadow-[0_30px_80px_rgba(0,0,0,0.8)] z-10 cursor-pointer"
                   >
                     <div className="relative w-full h-full overflow-hidden rounded-2xl flex items-center justify-center">
                       {project.media[0].endsWith('.mp4') ? (
@@ -184,18 +186,19 @@ export function UnifiedProjectModal({ isOpen, onClose, project }: UnifiedProject
                         initial="hidden"
                         whileInView="visible"
                         viewport={{ once: true, margin: "-40px" }}
-                        className={`w-full ${aspectRatioClass} bg-transparent rounded-xl overflow-hidden relative transition-all duration-[800ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-3 hover:scale-[1.03] hover:shadow-[0_30px_60px_rgba(0,0,0,0.6)] z-10 hover:z-20`}
+                        onClick={() => setSelectedMedia({ url, isVideo })}
+                        className={`w-full ${aspectRatioClass} bg-transparent rounded-xl overflow-hidden relative transition-all duration-[800ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-3 hover:scale-[1.03] hover:shadow-[0_30px_60px_rgba(0,0,0,0.6)] z-10 hover:z-20 cursor-pointer`}
                       >
                         {isVideo ? (
                           <>
-                            <video
-                              src={url}
-                              autoPlay
-                              muted
-                              loop
-                              playsInline
-                              className="w-full h-full object-cover"
-                            />
+                              <video
+                                src={url}
+                                autoPlay
+                                muted
+                                loop
+                                playsInline
+                                className="w-full h-full object-cover pointer-events-none"
+                              />
                             <div className="absolute inset-0 pointer-events-none rounded-xl shadow-[inset_0_0_30px_rgba(0,0,0,0.3)]"></div>
                           </>
                         ) : (
@@ -216,6 +219,56 @@ export function UnifiedProjectModal({ isOpen, onClose, project }: UnifiedProject
               )}
             </div>
           </motion.div>
+
+          {/* Inline Media Preview Overlay */}
+          <AnimatePresence>
+            {selectedMedia && (
+              <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 md:p-8">
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  onClick={() => setSelectedMedia(null)}
+                  className="absolute inset-0 bg-black/95 backdrop-blur-xl cursor-pointer"
+                />
+                
+                <motion.button
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  onClick={() => setSelectedMedia(null)}
+                  className="absolute top-4 right-4 md:top-8 md:right-8 z-50 flex items-center justify-center w-12 h-12 rounded-full bg-white/10 hover:bg-white text-white hover:text-black transition-colors"
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                  </svg>
+                </motion.button>
+
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  className="relative z-10 w-full max-w-[90vw] md:max-w-[80vw] h-[80vh] flex items-center justify-center"
+                >
+                  {selectedMedia.isVideo ? (
+                    <video 
+                      src={selectedMedia.url} 
+                      autoPlay 
+                      controls 
+                      className="max-w-full max-h-full rounded-xl object-contain outline-none" 
+                    />
+                  ) : (
+                    <img 
+                      src={selectedMedia.url} 
+                      alt="Preview" 
+                      className="max-w-full max-h-full rounded-xl object-contain" 
+                    />
+                  )}
+                </motion.div>
+              </div>
+            )}
+          </AnimatePresence>
         </div>
       )}
     </AnimatePresence>

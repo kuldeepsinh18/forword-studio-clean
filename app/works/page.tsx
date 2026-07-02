@@ -110,6 +110,7 @@ const UniversalCard = ({ project, onClick }: { project: any, onClick?: () => voi
       variants={itemVariants}
       onClick={onClick}
       // Fixed aspect ratio (landscape) to guarantee consistent sizing exactly as requested
+      // LOCKED DIMENSIONS: Do not change aspect-video md:aspect-[16/9] or spacing across desktop/tablet/mobile per client request
       className="group relative w-full aspect-video md:aspect-[16/9] rounded-xl overflow-hidden cursor-pointer"
     >
       <div className="absolute inset-0 w-full h-full" style={{ background: project.bg || "linear-gradient(160deg, #1a100a 0%, #100804 40%, #050505 100%)" }}>

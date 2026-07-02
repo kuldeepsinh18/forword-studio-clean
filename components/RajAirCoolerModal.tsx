@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
 
 interface CampaignModalProps {
@@ -67,6 +67,7 @@ const allAssets = [
 ];
 
 export function RajAirCoolerModal({ isOpen, onClose }: CampaignModalProps) {
+  const [selectedMedia, setSelectedMedia] = useState<{ url: string; isVideo: boolean } | null>(null);
   // Prevent background scrolling when modal is open
   useEffect(() => {
     if (isOpen) {
@@ -147,6 +148,7 @@ export function RajAirCoolerModal({ isOpen, onClose }: CampaignModalProps) {
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true, margin: "-40px" }}
+                    onClick={() => setSelectedMedia({ url: asset.type === 'post' ? `/selected-work/raj-air-cooler/post-0${asset.num}.png` : `/selected-work/raj-air-cooler/reel-0${asset.num}.mp4`, isVideo: asset.type === 'reel' })}
                     className="w-full aspect-[4/5] bg-transparent rounded-xl overflow-hidden relative transition-all duration-[800ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-3 hover:scale-[1.03] hover:shadow-[0_30px_60px_rgba(0,0,0,0.6)] cursor-pointer z-10 hover:z-20"
                   >
                     {asset.type === 'post' ? (
@@ -170,8 +172,7 @@ export function RajAirCoolerModal({ isOpen, onClose }: CampaignModalProps) {
                           muted
                           loop
                           playsInline
-                          preload="none"
-                          className="w-full h-full object-cover"
+                          className="w-full h-full object-cover pointer-events-none"
                         />
                         <div className="absolute inset-0 flex items-center justify-center -z-10 bg-[#111]">
                            <span className="text-[#555] font-sans text-xs md:text-base">reel-0{asset.num}.mp4</span>
@@ -184,6 +185,56 @@ export function RajAirCoolerModal({ isOpen, onClose }: CampaignModalProps) {
               </div>
             </div>
           </motion.div>
+
+          {/* Inline Media Preview Overlay */}
+          <AnimatePresence>
+            {selectedMedia && (
+              <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 md:p-8">
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  onClick={() => setSelectedMedia(null)}
+                  className="absolute inset-0 bg-black/95 backdrop-blur-xl cursor-pointer"
+                />
+                
+                <motion.button
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  onClick={() => setSelectedMedia(null)}
+                  className="absolute top-4 right-4 md:top-8 md:right-8 z-50 flex items-center justify-center w-12 h-12 rounded-full bg-white/10 hover:bg-white text-white hover:text-black transition-colors"
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                  </svg>
+                </motion.button>
+
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  className="relative z-10 w-full max-w-[90vw] md:max-w-[80vw] h-[80vh] flex items-center justify-center"
+                >
+                  {selectedMedia.isVideo ? (
+                    <video 
+                      src={selectedMedia.url} 
+                      autoPlay 
+                      controls 
+                      className="max-w-full max-h-full rounded-xl object-contain outline-none" 
+                    />
+                  ) : (
+                    <img 
+                      src={selectedMedia.url} 
+                      alt="Preview" 
+                      className="max-w-full max-h-full rounded-xl object-contain" 
+                    />
+                  )}
+                </motion.div>
+              </div>
+            )}
+          </AnimatePresence>
         </div>
       )}
     </AnimatePresence>
