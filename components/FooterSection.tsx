@@ -70,8 +70,8 @@ export function FooterSection() {
               </span>
               <div className="flex flex-col gap-4 items-start text-left">
                 {[
-                  { label: 'WhatsApp', href: 'https://wa.me/918866035771' },
                   { label: 'Instagram', href: 'https://instagram.com/frward_studio' },
+                  { label: 'WhatsApp', href: 'https://wa.me/918866035771' },
                   { label: 'Mail', href: 'mailto:zalahardip70@gmail.com' }
                 ].map((link) => (
                   <a 
@@ -79,9 +79,12 @@ export function FooterSection() {
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-[16px] lg:text-[18px] font-light tracking-wide text-white/60 hover:text-white transition-colors duration-[400ms] ease-out inline-block"
+                    className="group flex items-center gap-1.5 text-[16px] lg:text-[18px] font-light tracking-wide text-white/60 hover:text-white transition-colors duration-[400ms] ease-out"
                   >
                     {link.label}
+                    <span className="inline-block transition-transform duration-[400ms] ease-out group-hover:translate-x-1 group-hover:-translate-y-1">
+                      ↗
+                    </span>
                   </a>
                 ))}
               </div>
