@@ -31,42 +31,44 @@ export function Navigation() {
         backdropFilter: isScrolled ? "blur(12px)" : "blur(0px)",
       }}
       initial={{ opacity: 0, background: "rgba(5, 5, 5, 0)", backdropFilter: "blur(0px)" }}
-      className="fixed top-0 left-0 right-0 z-[100] flex items-start justify-between pt-4 pb-4 px-5 lg:px-[4.5rem]"
+      className="fixed top-0 left-0 right-0 z-[100] pt-4 pb-4 px-5 lg:px-[4.5rem]"
       transition={{ duration: 1 }}
     >
-      {/* ── Logo (Left) ── */}
-      <Link
-        href="/"
-        aria-label="Forward Studio Home"
-        className="text-[20px] lg:text-[24px] font-medium tracking-[-0.04em] text-white no-underline leading-none"
-      >
-        Forward Studio
-      </Link>
+      <div className="max-w-[1600px] w-full mx-auto flex items-start justify-between relative">
+        {/* ── Logo (Left) ── */}
+        <Link
+          href="/"
+          aria-label="Forward Studio Home"
+          className="text-[20px] lg:text-[24px] font-medium tracking-[-0.04em] text-white no-underline leading-none"
+        >
+          Forward Studio
+        </Link>
 
-      {/* ── Nav Links (Center) ── */}
-      <nav
-        aria-label="Main navigation"
-        className="nav-center-links absolute left-1/2 -translate-x-1/2 hidden lg:flex items-center gap-4 top-[22px]"
-      >
-        {navLinks.map((link) => (
+        {/* ── Nav Links (Center) ── */}
+        <nav
+          aria-label="Main navigation"
+          className="nav-center-links absolute left-1/2 -translate-x-1/2 hidden lg:flex items-center gap-4 top-[6px]"
+        >
+          {navLinks.map((link) => (
+            <Link
+              key={link.label}
+              href={link.href}
+              className="text-[13px] font-normal text-white no-underline"
+            >
+              {link.label}
+            </Link>
+          ))}
+        </nav>
+
+        {/* ── Right: Contact ── */}
+        <div className="pt-1">
           <Link
-            key={link.label}
-            href={link.href}
+            href="/#contact"
             className="text-[13px] font-normal text-white no-underline"
           >
-            {link.label}
+            Contact
           </Link>
-        ))}
-      </nav>
-
-      {/* ── Right: Contact ── */}
-      <div className="pt-1">
-        <Link
-          href="/#contact"
-          className="text-[13px] font-normal text-white no-underline"
-        >
-          Contact
-        </Link>
+        </div>
       </div>
     </motion.header>
   );
