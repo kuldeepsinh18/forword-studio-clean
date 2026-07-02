@@ -43,7 +43,7 @@ export function FooterSection() {
           {/* Main Content: Structured Grid Layout */}
           <motion.div 
             variants={fadeUpVariant}
-            className="w-full grid grid-cols-2 md:grid-cols-2 lg:grid-cols-12 gap-8 md:gap-8 mb-12 lg:mb-24"
+            className="w-full grid grid-cols-2 md:grid-cols-2 lg:grid-cols-12 gap-8 md:gap-8 mb-12 lg:mb-24 items-start"
           >
             {/* Left Column: WEBSITE */}
             <div className="flex flex-col gap-6 lg:col-span-4 lg:col-start-1 items-start text-left">
