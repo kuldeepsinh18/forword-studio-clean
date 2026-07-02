@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
+import { CinematicVideo } from "./CinematicVideo";
 
 interface CampaignModalProps {
   isOpen: boolean;
@@ -126,29 +127,11 @@ export function DaburLalTailModal({ isOpen, onClose }: CampaignModalProps) {
 
               {/* Cinematic Video Container */}
               <div className="w-full flex justify-center mb-8 lg:mb-16">
-                <motion.div
-                  custom={1}
-                  variants={itemVariants}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true, margin: "-40px" }}
-                  className="w-[90vw] h-[85vh] lg:h-[90vh] max-w-[1800px] bg-black rounded-2xl overflow-hidden relative shadow-[0_30px_80px_rgba(0,0,0,0.8)] z-10"
-                >
-                  {/* Media Wrapper */}
-                  <div className="relative w-full h-full overflow-hidden rounded-2xl">
-                    <video
-                      src="/selected-work/dabur lal tail/dabur lal tail.mp4"
-                      autoPlay
-                      muted
-                      controls
-                      playsInline
-                      preload="metadata"
-                      className="absolute inset-0 w-full h-full object-cover object-center"
-                    />
-                  </div>
-                  {/* Subtle vignette/gradient overlay for premium cinematic feel */}
-                  <div className="absolute inset-0 pointer-events-none rounded-2xl shadow-[inset_0_0_100px_rgba(0,0,0,0.5)]"></div>
-                </motion.div>
+                <CinematicVideo 
+                  src="/selected-work/dabur lal tail/dabur lal tail.mp4" 
+                  custom={1} 
+                  variants={itemVariants} 
+                />
               </div>
 
             </div>
