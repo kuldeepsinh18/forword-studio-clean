@@ -151,7 +151,7 @@ export function WorksSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-40px" }}
           transition={{ duration: 0.9, ease }}
-          className="w-full px-5 lg:px-[4.5rem] pt-[100px] lg:pt-[140px]"
+          className="w-full px-5 lg:px-[4.5rem] pt-[60px] lg:pt-[140px]"
         >
           <div className="max-w-[1600px] mx-auto pb-6 lg:pb-8">
             <span
@@ -166,7 +166,7 @@ export function WorksSection() {
         </motion.div>
 
         {/* ── PROJECTS ── */}
-        <div className="w-full mt-[60px] lg:mt-[80px]">
+        <div className="w-full mt-[40px] lg:mt-[80px]">
           {works.map((work) => (
             <ProjectItem 
               key={work.id} 

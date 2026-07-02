@@ -49,11 +49,11 @@ const fadeUpVariant = {
 
 export function ServicesSection() {
   return (
-    <section id="services" className="w-full bg-[#050505] text-white py-[80px] lg:py-[140px] px-5 lg:px-[4.5rem]">
+    <section id="services" className="w-full bg-[#050505] text-white py-[60px] lg:py-[140px] px-5 lg:px-[4.5rem]">
       <div className="max-w-[1600px] mx-auto">
         
         {/* Header - Clean left-aligned stack */}
-        <div className="flex flex-col items-start mb-16 lg:mb-24 gap-4 lg:gap-6">
+        <div className="flex flex-col items-start mb-10 lg:mb-24 gap-3 lg:gap-6">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -85,7 +85,7 @@ export function ServicesSection() {
               whileInView="visible"
               viewport={{ once: true, margin: "-50px" }}
               variants={fadeUpVariant}
-              className="group border-t border-white/10 flex flex-col lg:flex-row items-start lg:items-center justify-between py-6 lg:py-10 gap-4 lg:gap-0 cursor-pointer"
+              className="group border-t border-white/10 flex flex-col lg:flex-row items-start lg:items-center justify-between py-5 lg:py-10 gap-3 lg:gap-0 cursor-pointer"
             >
               {/* Number */}
               <div className="w-full lg:w-[15%] text-[13px] lg:text-[15px] text-white/40 font-medium tracking-wide">

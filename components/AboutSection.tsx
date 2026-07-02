@@ -26,7 +26,7 @@ const staggerContainer = {
 
 export function AboutSection() {
   return (
-    <section id="about" className="w-full bg-[#050505] text-white py-[80px] lg:py-[140px] px-5 lg:px-[4.5rem] relative overflow-hidden">
+    <section id="about" className="w-full bg-[#050505] text-white py-[60px] lg:py-[140px] px-5 lg:px-[4.5rem] relative overflow-hidden">
       {/* Subtle Noise Texture */}
       <motion.div
         initial="hidden"
@@ -45,7 +45,7 @@ export function AboutSection() {
         {/* Main Editorial Text Block */}
         <motion.div
           variants={fadeUpVariant}
-          className="w-full lg:w-[65%] mb-16 lg:mb-[100px]"
+          className="w-full lg:w-[65%] mb-10 lg:mb-[100px]"
         >
           <p className="text-[24px] md:text-[32px] lg:text-[42px] font-normal leading-[1.3] tracking-[-0.01em] m-0 text-white">
             Forward Studio is a creative agency focused on building memorable
@@ -57,7 +57,7 @@ export function AboutSection() {
         {/* Bottom Content - 3 Columns */}
         <motion.div
           variants={fadeUpVariant}
-          className="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-10 w-full lg:w-[65%]"
+          className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10 w-full lg:w-[65%]"
         >
           {/* Column 1 */}
           <div>
