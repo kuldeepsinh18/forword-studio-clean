@@ -69,7 +69,14 @@ export function SmartLogo({ src, alt, className = "", containerClassName = "" }:
             }
           } else {
             // For white/black backgrounds, just keep the original foreground pixel colors
-            // (e.g., Dabur's colorful logo, DTC's white logo)
+            
+            // Auto-invert dark text (like 'Check', '24', 'Surbhika') to pure white
+            if (r < 90 && g < 90 && b < 90) {
+              data[i] = 255;
+              data[i + 1] = 255;
+              data[i + 2] = 255;
+            }
+
             // Smoothing for edges against white/black
             if (dist < tolerance + 40) {
               const alphaFactor = (dist - tolerance) / 40;
