@@ -33,7 +33,7 @@ export function AboutSection() {
         whileInView="visible"
         viewport={{ once: true, margin: "-15% 0px" }}
         variants={staggerContainer}
-        className="max-w-[1600px] w-full mx-auto"
+        className="max-w-[1400px] mx-auto"
       >
         {/* Top Left Label */}
         <motion.div variants={fadeUpVariant} className="mb-12 lg:mb-[60px]">

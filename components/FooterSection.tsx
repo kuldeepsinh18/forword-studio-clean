@@ -27,7 +27,7 @@ const staggerContainer = {
 
 export function FooterSection() {
   return (
-    <footer id="contact" className="w-full bg-[#050505] text-white pt-[60px] lg:pt-[140px] pb-[40px] px-5 lg:px-[4.5rem] relative overflow-hidden">
+    <footer id="contact" className="w-full bg-[#050505] text-white pt-[80px] lg:pt-[200px] pb-[40px] px-6 lg:px-10 relative overflow-hidden">
       {/* Subtle Noise Texture */}
       <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.03] bg-[url('data:image/svg+xml,%3Csvg viewBox=%220 0 256 256%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noise%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.85%22 numOctaves=%224%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noise)%22/%3E%3C/svg%3E')] bg-repeat bg-[length:200px_200px]"></div>
 
