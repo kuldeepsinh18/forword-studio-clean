@@ -27,7 +27,7 @@ const staggerContainer = {
 
 export function FooterSection() {
   return (
-    <footer id="contact" className="w-full bg-[#050505] text-white pt-[250px] lg:pt-[450px] pb-[40px] lg:pb-[60px] px-5 lg:px-[4.5rem] relative overflow-hidden">
+    <footer id="contact" className="w-full bg-[#050505] text-white pt-[120px] lg:pt-[200px] pb-[40px] px-6 lg:px-10 relative overflow-hidden">
       {/* Subtle Noise Texture */}
       <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.03] bg-[url('data:image/svg+xml,%3Csvg viewBox=%220 0 256 256%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noise%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.85%22 numOctaves=%224%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noise)%22/%3E%3C/svg%3E')] bg-repeat bg-[length:200px_200px]"></div>
 
@@ -40,22 +40,22 @@ export function FooterSection() {
           variants={staggerContainer}
           className="w-full flex flex-col"
         >
-          {/* Main Content: 2-Column Links Layout Far Apart */}
+          {/* Main Content: Structured Grid Layout */}
           <motion.div 
             variants={fadeUpVariant}
-            className="w-full flex flex-col md:flex-row justify-between mb-20 lg:mb-32 gap-16 md:gap-8"
+            className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-16 md:gap-8 mb-20 lg:mb-24"
           >
             {/* Left Column: WEBSITE */}
-            <div className="flex flex-col gap-6 lg:gap-8 items-start text-left">
-              <span className="text-[14px] font-medium tracking-[0.15em] uppercase text-white/40 mb-2">
+            <div className="flex flex-col gap-6 lg:col-span-4 lg:col-start-1 items-start text-left">
+              <span className="text-[12px] font-medium tracking-[0.2em] uppercase text-white/40 mb-2">
                 WEBSITE
               </span>
-              <div className="flex flex-col gap-[32px] items-start text-left">
+              <div className="flex flex-col gap-4 items-start text-left">
                 {['Home', 'About', 'Works', 'Services', 'Contact'].map((link) => (
                   <Link 
                     key={link} 
                     href={link === 'Home' ? '/' : `#${link.toLowerCase()}`}
-                    className="text-[16px] md:text-[20px] lg:text-[28px] font-medium text-white/60 hover:text-white transition-colors duration-[400ms] ease-out inline-block"
+                    className="text-[16px] lg:text-[18px] font-light tracking-wide text-white/60 hover:text-white transition-colors duration-[400ms] ease-out inline-block"
                   >
                     {link}
                   </Link>
@@ -64,11 +64,11 @@ export function FooterSection() {
             </div>
 
             {/* Right Column: SOCIAL */}
-            <div className="flex flex-col gap-6 lg:gap-8 items-start text-left">
-              <span className="text-[14px] font-medium tracking-[0.15em] uppercase text-white/40 mb-2">
+            <div className="flex flex-col gap-6 lg:col-span-4 lg:col-start-7 items-start text-left">
+              <span className="text-[12px] font-medium tracking-[0.2em] uppercase text-white/40 mb-2">
                 SOCIAL
               </span>
-              <div className="flex flex-col gap-[32px] items-start text-left">
+              <div className="flex flex-col gap-4 items-start text-left">
                 {[
                   { label: 'Instagram ↗', href: 'https://instagram.com' },
                   { label: 'WhatsApp ↗', href: 'https://whatsapp.com' },
@@ -80,7 +80,7 @@ export function FooterSection() {
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-[16px] md:text-[20px] lg:text-[28px] font-medium text-white/60 hover:text-white transition-colors duration-[400ms] ease-out inline-block"
+                    className="text-[16px] lg:text-[18px] font-light tracking-wide text-white/60 hover:text-white transition-colors duration-[400ms] ease-out inline-block"
                   >
                     {link.label}
                   </a>
@@ -92,9 +92,9 @@ export function FooterSection() {
           {/* Bottom Area */}
           <motion.div 
             variants={fadeUpVariant}
-            className="w-full flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4"
+            className="w-full flex flex-col sm:flex-row justify-between items-start gap-4 border-t border-white/10 pt-8"
           >
-            <div className="text-[13px] lg:text-[15px] font-medium text-white/40 tracking-wide">
+            <div className="text-[13px] font-light text-white/40 tracking-wide">
               © 2026 Forward Studio. All Rights Reserved
             </div>
           </motion.div>
