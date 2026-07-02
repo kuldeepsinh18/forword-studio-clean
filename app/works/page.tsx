@@ -115,15 +115,17 @@ const UniversalCard = ({ project, onClick }: { project: any, onClick?: () => voi
     >
       <div className="absolute inset-0 w-full h-full" style={{ background: project.bg || "linear-gradient(160deg, #1a100a 0%, #100804 40%, #050505 100%)" }}>
         {project.preview && project.preview.endsWith('.mp4') ? (
-          <video
-            src={isInView ? project.preview : ""}
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="metadata"
-            className="absolute inset-0 w-full h-full object-cover object-center opacity-50 group-hover:opacity-80 transition-opacity duration-700 ease-[0.16,1,0.3,1]"
-          />
+          isInView && (
+            <video
+              src={project.preview}
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              className="absolute inset-0 w-full h-full object-cover object-center opacity-50 group-hover:opacity-80 transition-opacity duration-700 ease-[0.16,1,0.3,1]"
+            />
+          )
         ) : (
           project.preview && (
             <img

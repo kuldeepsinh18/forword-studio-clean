@@ -86,9 +86,9 @@ function ProjectItem({ work, onClick }: { work: (typeof works)[0], onClick?: () 
           top: "-10%",
         }}
       >
-        {work.videoUrl && (
+        {work.videoUrl && isInView && (
           <video
-            src={isInView ? work.videoUrl : ""}
+            src={work.videoUrl}
             autoPlay
             muted
             loop
