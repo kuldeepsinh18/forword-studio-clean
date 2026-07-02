@@ -4,7 +4,7 @@ import { motion, cubicBezier } from "framer-motion";
 
 export function ShowreelSection() {
   return (
-    <section className="w-full bg-[#050505] py-[60px] lg:py-[100px] overflow-hidden flex justify-center">
+    <section className="w-full bg-[#050505] pt-2 pb-[60px] lg:pt-3 lg:pb-[100px] overflow-hidden flex justify-center">
       <motion.div 
         initial={{ scale: 0.95, opacity: 0 }}
         whileInView={{ scale: 1, opacity: 1 }}

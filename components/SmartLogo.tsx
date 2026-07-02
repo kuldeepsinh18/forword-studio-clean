@@ -70,11 +70,27 @@ export function SmartLogo({ src, alt, className = "", containerClassName = "" }:
           } else {
             // For white/black backgrounds, just keep the original foreground pixel colors
             
-            // Auto-invert dark text (like 'Check', '24', 'Surbhika') to pure white
-            if (r < 90 && g < 90 && b < 90) {
+            // Custom rules for specific logos based on user request
+            if (alt.toLowerCase().includes("surbhika")) {
+              // Force entire Surbhika logo to pure white
               data[i] = 255;
               data[i + 1] = 255;
               data[i + 2] = 255;
+            } else if (alt.toLowerCase().includes("checkcars24")) {
+              // Force "Check" and "24" to pure white, preserving the orange "Cars" text
+              const isOrangeOrRed = r > 120 && r > b * 1.5 && r > g * 1.1;
+              if (!isOrangeOrRed) {
+                data[i] = 255;
+                data[i + 1] = 255;
+                data[i + 2] = 255;
+              }
+            } else {
+              // General rule: auto-invert very dark text to pure white
+              if (r < 90 && g < 90 && b < 90) {
+                data[i] = 255;
+                data[i + 1] = 255;
+                data[i + 2] = 255;
+              }
             }
 
             // Smoothing for edges against white/black
