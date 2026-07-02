@@ -37,6 +37,7 @@ export function Preloader() {
           setTimeout(() => {
             setIsVisible(false);
             document.documentElement.style.overflow = "";
+            initBackgroundPreloader(); // Start smart background preloading
           }, 900);
         }, 300);
       }
@@ -158,15 +159,81 @@ export function Preloader() {
             }}
           />
 
-          {/* Invisible Metadata Cache for Videos */}
-          <div style={{ display: "none" }}>
-            <video preload="metadata" src="/selected-work/DTC Still Waters/preview.mp4" />
-            <video preload="metadata" src="/selected-work/dabur lal tail/preview.mp4" />
-            <video preload="metadata" src="/selected-work/DTC Still Waters/DTC Still Waters.mp4" />
-            <video preload="metadata" src="/selected-work/dabur lal tail/dabur lal tail.mp4" />
-          </div>
+          {/* Invisible Metadata Cache for Videos - handled by background preloader */}
         </motion.div>
       )}
     </AnimatePresence>
   );
+}
+
+// Helper to gracefully preload assets without blocking main thread
+function initBackgroundPreloader() {
+  if (typeof window === 'undefined') return;
+  
+  const preloadAssets = () => {
+    const assets = [
+      "/selected-work/DTC Still Waters/VIDEO.mp4",
+      "/selected-work/DTC Still Waters/preview.mp4",
+      "/selected-work/dabur lal tail/dabur lal tail.mp4",
+      "/selected-work/dabur lal tail/preview.mp4",
+      "/selected-work/gopal-snacks/post-01.png",
+      "/selected-work/gopal-snacks/post-02.png",
+      "/selected-work/gopal-snacks/post-03.png",
+      "/selected-work/gopal-snacks/post-04.png",
+      "/selected-work/gopal-snacks/post-05.png",
+      "/selected-work/gopal-snacks/post-06.png",
+      "/selected-work/gopal-snacks/reel-01.mp4",
+      "/selected-work/gopal-snacks/reel-02.mp4",
+      "/selected-work/Mahalaxmi-masala/post-01.png",
+      "/selected-work/Mahalaxmi-masala/post-02.png",
+      "/selected-work/Mahalaxmi-masala/post-03.png",
+      "/selected-work/Mahalaxmi-masala/post-04.png",
+      "/selected-work/Mahalaxmi-masala/post-05.png",
+      "/selected-work/Mahalaxmi-masala/post-06.png",
+      "/selected-work/Mahalaxmi-masala/reel-01.mp4",
+      "/selected-work/Mahalaxmi-masala/reel-02.mp4",
+      "/selected-work/raj-air-cooler/post-01.png",
+      "/selected-work/raj-air-cooler/post-02.png",
+      "/selected-work/raj-air-cooler/post-03.png",
+      "/selected-work/raj-air-cooler/post-04.png",
+      "/selected-work/raj-air-cooler/post-05.png",
+      "/selected-work/raj-air-cooler/post-06.png",
+      "/selected-work/raj-air-cooler/reel-01.mp4",
+      "/selected-work/raj-air-cooler/reel-02.mp4",
+      "/all-work/3d-product-visualization/summercool-big-b.mp4",
+      "/all-work/3d-product-visualization/surbhika-marigold.mp4"
+    ];
+
+    let i = 0;
+    const preloadNext = () => {
+      if (i >= assets.length) return;
+      const url = assets[i];
+      i++;
+      
+      const link = document.createElement('link');
+      link.rel = 'preload';
+      link.href = url;
+      if (url.endsWith('.mp4')) {
+        link.as = 'video';
+      } else {
+        link.as = 'image';
+      }
+      document.head.appendChild(link);
+      
+      if ('requestIdleCallback' in window) {
+        (window as any).requestIdleCallback(preloadNext);
+      } else {
+        setTimeout(preloadNext, 50);
+      }
+    };
+    
+    if ('requestIdleCallback' in window) {
+      (window as any).requestIdleCallback(preloadNext);
+    } else {
+      setTimeout(preloadNext, 500);
+    }
+  };
+
+  // Give homepage priority, wait a little before starting heavy preloads
+  setTimeout(preloadAssets, 2000);
 }

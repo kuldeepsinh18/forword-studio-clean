@@ -89,7 +89,7 @@ export function CampaignModal({ isOpen, onClose }: CampaignModalProps) {
             animate="visible"
             exit="exit"
             onClick={onClose}
-            className="absolute inset-0 bg-black/80 backdrop-blur-md cursor-pointer"
+            className="absolute inset-0 bg-black/80 backdrop-blur-sm md:backdrop-blur-md cursor-pointer"
           />
 
           {/* Modal Container */}
@@ -229,7 +229,7 @@ export function CampaignModal({ isOpen, onClose }: CampaignModalProps) {
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   onClick={() => setSelectedMedia(null)}
-                  className="absolute inset-0 bg-black/95 backdrop-blur-xl cursor-pointer"
+                  className="absolute inset-0 bg-black/95 backdrop-blur-sm md:backdrop-blur-xl cursor-pointer"
                 />
                 
                 <motion.button

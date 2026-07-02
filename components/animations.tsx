@@ -1,12 +1,24 @@
 "use client";
 
 import { motion, useInView, Variants } from "framer-motion";
-import { useRef, ReactNode } from "react";
+import { useRef, ReactNode, useState, useEffect } from "react";
 
 // ─── Shared Easing Curves ────────────────────────────────────────
 export const EASE_PREMIUM = [0.76, 0, 0.24, 1] as const;
 export const EASE_OUT_EXPO = [0.19, 1, 0.22, 1] as const;
 export const EASE_IN_OUT_QUART = [0.77, 0, 0.175, 1] as const;
+
+// ─── Custom Hook for Mobile Detection ────────────────────────────
+export function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+  return isMobile;
+}
 
 // ─── Shared Variants ─────────────────────────────────────────────
 
@@ -80,15 +92,20 @@ export function AnimateIn({
 }: AnimateInProps) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once, margin: "-5% 0px" });
+  const isMobile = useIsMobile();
+  
+  // Reduce motion distance and duration on mobile
+  const activeDistance = isMobile ? distance / 2 : distance;
+  const activeDuration = isMobile ? duration * 0.75 : duration;
 
   const getInitial = () => {
     switch (direction) {
-      case "up": return { y: distance, opacity: 0 };
-      case "down": return { y: -distance, opacity: 0 };
-      case "left": return { x: distance, opacity: 0 };
-      case "right": return { x: -distance, opacity: 0 };
+      case "up": return { y: activeDistance, opacity: 0 };
+      case "down": return { y: -activeDistance, opacity: 0 };
+      case "left": return { x: activeDistance, opacity: 0 };
+      case "right": return { x: -activeDistance, opacity: 0 };
       case "none": return { opacity: 0 };
-      default: return { y: distance, opacity: 0 };
+      default: return { y: activeDistance, opacity: 0 };
     }
   };
 
@@ -110,7 +127,7 @@ export function AnimateIn({
       initial={getInitial()}
       animate={inView ? getAnimate() : getInitial()}
       transition={{
-        duration,
+        duration: activeDuration,
         delay,
         ease: EASE_OUT_EXPO,
       }}
@@ -139,8 +156,13 @@ export function TextReveal({
 }: TextRevealProps) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-5% 0px" });
+  const isMobile = useIsMobile();
 
   const words = text.split(" ");
+  // Faster stagger on mobile
+  const activeStagger = isMobile ? stagger * 0.5 : stagger;
+  const activeDuration = isMobile ? 0.5 : 0.75;
+  const initialY = isMobile ? "50%" : "110%";
 
   return (
     <div ref={ref} className={className} aria-label={text}>
@@ -151,11 +173,11 @@ export function TextReveal({
         >
           <motion.span
             style={{ display: "inline-block" }}
-            initial={{ y: "110%" }}
-            animate={inView ? { y: "0%" } : { y: "110%" }}
+            initial={{ y: initialY, opacity: isMobile ? 0 : 1 }}
+            animate={inView ? { y: "0%", opacity: 1 } : { y: initialY, opacity: isMobile ? 0 : 1 }}
             transition={{
-              duration: 0.75,
-              delay: delay + wordIndex * stagger,
+              duration: activeDuration,
+              delay: delay + wordIndex * activeStagger,
               ease: EASE_OUT_EXPO,
             }}
           >
@@ -178,14 +200,18 @@ interface LineRevealProps {
 export function LineReveal({ children, delay = 0, className }: LineRevealProps) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-5% 0px" });
+  const isMobile = useIsMobile();
+
+  const activeDuration = isMobile ? 0.6 : 0.85;
+  const initialY = isMobile ? "50%" : "110%";
 
   return (
     <div ref={ref} style={{ overflow: "hidden" }} className={className}>
       <motion.div
-        initial={{ y: "110%" }}
-        animate={inView ? { y: "0%" } : { y: "110%" }}
+        initial={{ y: initialY, opacity: isMobile ? 0 : 1 }}
+        animate={inView ? { y: "0%", opacity: 1 } : { y: initialY, opacity: isMobile ? 0 : 1 }}
         transition={{
-          duration: 0.85,
+          duration: activeDuration,
           delay,
           ease: EASE_OUT_EXPO,
         }}

@@ -82,7 +82,7 @@ export function DaburLalTailModal({ isOpen, onClose }: CampaignModalProps) {
             animate="visible"
             exit="exit"
             onClick={onClose}
-            className="absolute inset-0 bg-[rgba(0,0,0,0.95)] backdrop-blur-[20px] cursor-pointer"
+            className="absolute inset-0 bg-[rgba(0,0,0,0.95)] backdrop-blur-sm md:backdrop-blur-[20px] cursor-pointer"
           />
 
           {/* Modal Container */}
