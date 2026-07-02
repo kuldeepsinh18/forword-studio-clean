@@ -138,7 +138,7 @@ export function SummercoolBigBModal({ isOpen, onClose }: CampaignModalProps) {
                   {/* Media Wrapper */}
                   <div className="relative w-full h-full overflow-hidden rounded-2xl">
                     <video
-                      src="/all-work/3D Product Visualization/Summercool Big-B.mp4"
+                      src="/all-work/3d-product-visualization/summercool-big-b.mp4"
                       autoPlay
                       muted
                       controls

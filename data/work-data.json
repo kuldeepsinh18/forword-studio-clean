@@ -1,3 +1,43 @@
 {
-  "categories": []
+  "categories": [
+    {
+      "id": "3d-product-visualization",
+      "name": "3d Product Visualization",
+      "projects": [
+        {
+          "id": "summercool-big-b",
+          "name": "Summercool Big B",
+          "category": "3d Product Visualization",
+          "media": [
+            "/all-work/3d-product-visualization/summercool-big-b.mp4"
+          ],
+          "preview": "/all-work/3d-product-visualization/summercool-big-b.mp4"
+        },
+        {
+          "id": "surbhika-marigold",
+          "name": "Surbhika Marigold",
+          "category": "3d Product Visualization",
+          "media": [
+            "/all-work/3d-product-visualization/surbhika-marigold.mp4"
+          ],
+          "preview": "/all-work/3d-product-visualization/surbhika-marigold.mp4"
+        }
+      ]
+    },
+    {
+      "id": "brand-films",
+      "name": "Brand Films",
+      "projects": [
+        {
+          "id": "ledvance-brand-films",
+          "name": "Ledvance Brand Films",
+          "category": "Brand Films",
+          "media": [
+            "/all-work/brand-films/ledvance-brand-films.mp4"
+          ],
+          "preview": "/all-work/brand-films/ledvance-brand-films.mp4"
+        }
+      ]
+    }
+  ]
 }

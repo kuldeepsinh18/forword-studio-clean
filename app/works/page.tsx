@@ -67,7 +67,7 @@ const legacyProjects = [
     name: "Surbhika Marigold",
     category: "3D Product Visualization",
     bg: "linear-gradient(160deg, #1a100a 0%, #100804 40%, #080706 100%)",
-    preview: "/all-work/3D Product Visualization/Surbhika Marigold.mp4",
+    preview: "/all-work/3d-product-visualization/surbhika-marigold.mp4",
     isLegacy: true,
   },
   {
@@ -75,7 +75,7 @@ const legacyProjects = [
     name: "Summercool Big-B",
     category: "3D Product Visualization",
     bg: "linear-gradient(160deg, #1a100a 0%, #100804 40%, #080706 100%)",
-    preview: "/all-work/3D Product Visualization/Summercool Big-B.mp4",
+    preview: "/all-work/3d-product-visualization/summercool-big-b.mp4",
     isLegacy: true,
   },
 ];
