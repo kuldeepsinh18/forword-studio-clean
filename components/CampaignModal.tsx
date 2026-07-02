@@ -1,8 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
-import { MediaPreviewModal, MediaPreview } from "./MediaPreviewModal";
 
 interface CampaignModalProps {
   isOpen: boolean;
@@ -65,7 +64,6 @@ const itemVariants: Variants = {
 };
 
 export function CampaignModal({ isOpen, onClose }: CampaignModalProps) {
-  const [previewMedia, setPreviewMedia] = useState<MediaPreview | null>(null);
   // Prevent body scrolling when modal is open
   useEffect(() => {
     if (isOpen) {
@@ -137,8 +135,7 @@ export function CampaignModal({ isOpen, onClose }: CampaignModalProps) {
                   <img 
                     src="/campaigns/ledvance/post-01.jpg" 
                     alt="LEDVANCE Hero Post" 
-                    onClick={() => setPreviewMedia({ url: "/campaigns/ledvance/post-01.jpg", type: "image" })}
-                    className="w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-[1.03] cursor-pointer"
+                    className="w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-[1.03]"
                     onError={(e) => {
                       (e.target as HTMLImageElement).src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="100%25" height="100%25" viewBox="0 0 800 400"%3E%3Crect width="800" height="400" fill="%23111"/%3E%3Ctext x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" fill="%23555" font-family="sans-serif" font-size="24"%3EUpload post-01.jpg to public/campaigns/ledvance/%3C/text%3E%3C/svg%3E';
                     }}
@@ -153,8 +150,7 @@ export function CampaignModal({ isOpen, onClose }: CampaignModalProps) {
                     <img 
                       src={`/campaigns/ledvance/post-0${num}.jpg`} 
                       alt={`LEDVANCE Post 0${num}`} 
-                      onClick={() => setPreviewMedia({ url: `/campaigns/ledvance/post-0${num}.jpg`, type: "image" })}
-                      className="w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-[1.03] cursor-pointer"
+                      className="w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-[1.03]"
                       onError={(e) => {
                         (e.target as HTMLImageElement).src = `data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="100%25" height="100%25" viewBox="0 0 400 400"%3E%3Crect width="400" height="400" fill="%23111"/%3E%3Ctext x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" fill="%23555" font-family="sans-serif" font-size="16"%3Epost-0${num}.jpg%3C/text%3E%3C/svg%3E`;
                       }}
@@ -170,8 +166,7 @@ export function CampaignModal({ isOpen, onClose }: CampaignModalProps) {
                     <img 
                       src={`/campaigns/ledvance/post-0${num}.jpg`} 
                       alt={`LEDVANCE Post 0${num}`} 
-                      onClick={() => setPreviewMedia({ url: `/campaigns/ledvance/post-0${num}.jpg`, type: "image" })}
-                      className="w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-[1.03] cursor-pointer"
+                      className="w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-[1.03]"
                       onError={(e) => {
                         (e.target as HTMLImageElement).src = `data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="100%25" height="100%25" viewBox="0 0 400 500"%3E%3Crect width="400" height="500" fill="%23111"/%3E%3Ctext x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" fill="%23555" font-family="sans-serif" font-size="16"%3Epost-0${num}.jpg%3C/text%3E%3C/svg%3E`;
                       }}
@@ -187,8 +182,7 @@ export function CampaignModal({ isOpen, onClose }: CampaignModalProps) {
                     <img 
                       src={`/campaigns/ledvance/post-0${num}.jpg`} 
                       alt={`LEDVANCE Post 0${num}`} 
-                      onClick={() => setPreviewMedia({ url: `/campaigns/ledvance/post-0${num}.jpg`, type: "image" })}
-                      className="w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-[1.03] cursor-pointer"
+                      className="w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-[1.03]"
                       onError={(e) => {
                         (e.target as HTMLImageElement).src = `data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="100%25" height="100%25" viewBox="0 0 400 400"%3E%3Crect width="400" height="400" fill="%23111"/%3E%3Ctext x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" fill="%23555" font-family="sans-serif" font-size="16"%3Epost-0${num}.jpg%3C/text%3E%3C/svg%3E`;
                       }}
@@ -199,17 +193,14 @@ export function CampaignModal({ isOpen, onClose }: CampaignModalProps) {
 
               {/* Section 6: Full Width Video */}
               <motion.div variants={itemVariants} className="w-full">
-                <div 
-                  className="relative w-full aspect-[16/9] bg-white/5 rounded-xl overflow-hidden cursor-pointer"
-                  onClick={() => setPreviewMedia({ url: "/campaigns/ledvance/video.mp4", type: "video" })}
-                >
+                <div className="relative w-full aspect-[16/9] bg-white/5 rounded-xl overflow-hidden">
                   <video 
                     src="/campaigns/ledvance/video.mp4"
                     autoPlay
                     muted
                     loop
                     playsInline
-                    className="w-full h-full object-cover pointer-events-none"
+                    className="w-full h-full object-cover"
                   />
                   {/* Fallback text if video is missing */}
                   <div className="absolute inset-0 flex items-center justify-center -z-10 bg-[#111]">
@@ -220,12 +211,6 @@ export function CampaignModal({ isOpen, onClose }: CampaignModalProps) {
 
             </motion.div>
           </motion.div>
-
-          <MediaPreviewModal 
-            isOpen={previewMedia !== null}
-            onClose={() => setPreviewMedia(null)}
-            media={previewMedia}
-          />
         </div>
       )}
     </AnimatePresence>

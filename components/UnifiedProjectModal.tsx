@@ -1,8 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
-import { MediaPreviewModal, MediaPreview } from "./MediaPreviewModal";
 
 interface Project {
   id: string;
@@ -64,7 +63,6 @@ const itemVariants: Variants = {
 };
 
 export function UnifiedProjectModal({ isOpen, onClose, project }: UnifiedProjectModalProps) {
-  const [previewMedia, setPreviewMedia] = useState<MediaPreview | null>(null);
   useEffect(() => {
     if (isOpen) {
       document.documentElement.style.overflow = "hidden";
@@ -145,8 +143,7 @@ export function UnifiedProjectModal({ isOpen, onClose, project }: UnifiedProject
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true, margin: "-40px" }}
-                    onClick={() => setPreviewMedia({ url: project.media[0], type: project.media[0].endsWith('.mp4') ? "video" : "image" })}
-                    className="w-[90vw] h-[85vh] lg:h-[90vh] max-w-[1800px] bg-black rounded-2xl overflow-hidden relative shadow-[0_30px_80px_rgba(0,0,0,0.8)] z-10 cursor-pointer"
+                    className="w-[90vw] h-[85vh] lg:h-[90vh] max-w-[1800px] bg-black rounded-2xl overflow-hidden relative shadow-[0_30px_80px_rgba(0,0,0,0.8)] z-10"
                   >
                     <div className="relative w-full h-full overflow-hidden rounded-2xl flex items-center justify-center">
                       {project.media[0].endsWith('.mp4') ? (
@@ -187,8 +184,7 @@ export function UnifiedProjectModal({ isOpen, onClose, project }: UnifiedProject
                         initial="hidden"
                         whileInView="visible"
                         viewport={{ once: true, margin: "-40px" }}
-                        onClick={() => setPreviewMedia({ url, type: isVideo ? "video" : "image" })}
-                        className={`w-full ${aspectRatioClass} bg-transparent rounded-xl overflow-hidden relative transition-all duration-[800ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-3 hover:scale-[1.03] hover:shadow-[0_30px_60px_rgba(0,0,0,0.6)] z-10 hover:z-20 cursor-pointer`}
+                        className={`w-full ${aspectRatioClass} bg-transparent rounded-xl overflow-hidden relative transition-all duration-[800ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-3 hover:scale-[1.03] hover:shadow-[0_30px_60px_rgba(0,0,0,0.6)] z-10 hover:z-20`}
                       >
                         {isVideo ? (
                           <>
@@ -198,7 +194,7 @@ export function UnifiedProjectModal({ isOpen, onClose, project }: UnifiedProject
                               muted
                               loop
                               playsInline
-                              className="w-full h-full object-cover pointer-events-none"
+                              className="w-full h-full object-cover"
                             />
                             <div className="absolute inset-0 pointer-events-none rounded-xl shadow-[inset_0_0_30px_rgba(0,0,0,0.3)]"></div>
                           </>
@@ -220,12 +216,6 @@ export function UnifiedProjectModal({ isOpen, onClose, project }: UnifiedProject
               )}
             </div>
           </motion.div>
-
-          <MediaPreviewModal 
-            isOpen={previewMedia !== null}
-            onClose={() => setPreviewMedia(null)}
-            media={previewMedia}
-          />
         </div>
       )}
     </AnimatePresence>
