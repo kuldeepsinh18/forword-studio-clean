@@ -70,12 +70,12 @@ export function SmartLogo({ src, alt, className = "", containerClassName = "" }:
           } else {
             // For white/black backgrounds, just keep the original foreground pixel colors
             
-            // Strictly target only the text ("Surbhika", "Check", "24") to pure white
-            if (alt.toLowerCase().includes("surbhika") || alt.toLowerCase().includes("checkcars24")) {
+            // Only CheckCars24 should have its text turned to white
+            if (alt.toLowerCase().includes("checkcars24")) {
               const maxColor = Math.max(r, g, b);
               const minColor = Math.min(r, g, b);
               
-              // If pixel is dark OR mostly grey (low saturation, meaning it's black/grey text and NOT a colorful icon)
+              // Only convert dark/grey pixels to white (this isolates the dark text while preserving colorful icons)
               if ((r < 140 && g < 140 && b < 140) || (maxColor < 190 && maxColor - minColor < 40)) {
                 data[i] = 255;
                 data[i + 1] = 255;
