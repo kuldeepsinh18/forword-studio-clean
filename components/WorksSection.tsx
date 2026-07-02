@@ -196,7 +196,7 @@ export function WorksSection() {
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 1.0, ease }}
           className="w-full flex items-center justify-center"
-          style={{ height: "90vh" }}
+          style={{ height: "50vh" }}
         >
           <Link href="/works" className="group flex items-center gap-0 cursor-pointer">
             <motion.span
@@ -205,7 +205,7 @@ export function WorksSection() {
               whileHover={{ opacity: 0.7 }}
               transition={{ duration: 0.3 }}
             >
-              All Works (5)
+              All Works
             </motion.span>
           </Link>
         </motion.div>
