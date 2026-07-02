@@ -9,23 +9,13 @@ export function Preloader() {
   const [isExiting, setIsExiting] = useState(false);
 
   useEffect(() => {
-    // 1. Cache essential images for instant modal opens
-    const essentialImages = [
-      "/selected-work/gopal-snacks/post-01.png",
-      "/selected-work/raj-air-cooler/post-01.png",
-      "/selected-work/Mahalaxmi-masala/post-01.png",
-    ];
-    essentialImages.forEach(src => {
-      const img = new Image();
-      img.src = src;
-    });
-
     // Prevent scroll during preloader
     document.documentElement.style.overflow = "hidden";
 
     let currentProgress = 0;
-    const interval = 20;
-    const increment = 100 / (1500 / interval); // Base speed to hit 99% in ~1.5s
+    // Speed up interval to reduce blocking wait time
+    const interval = 16; // ~60fps
+    const increment = 100 / (800 / interval); // Faster initial load (0.8s)
     let timer: NodeJS.Timeout;
 
     const updateProgress = () => {

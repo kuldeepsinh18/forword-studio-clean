@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -11,24 +12,26 @@ const navLinks = [
 ];
 
 export function Navigation() {
-  const { scrollY } = useScroll();
-  const background = useTransform(
-    scrollY,
-    [0, 50],
-    ["rgba(5, 5, 5, 0)", "rgba(5, 5, 5, 0.8)"]
-  );
-  const backdropFilter = useTransform(
-    scrollY,
-    [0, 50],
-    ["blur(0px)", "blur(12px)"]
-  );
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <motion.header
-      style={{ background, backdropFilter }}
+      animate={{
+        opacity: 1,
+        background: isScrolled ? "rgba(5, 5, 5, 0.8)" : "rgba(5, 5, 5, 0)",
+        backdropFilter: isScrolled ? "blur(12px)" : "blur(0px)",
+      }}
+      initial={{ opacity: 0, background: "rgba(5, 5, 5, 0)", backdropFilter: "blur(0px)" }}
       className="fixed top-0 left-0 right-0 z-[100] flex items-start justify-between pt-4 pb-4 px-5 lg:px-[4.5rem]"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
       transition={{ duration: 1 }}
     >
       {/* ── Logo (Left) ── */}

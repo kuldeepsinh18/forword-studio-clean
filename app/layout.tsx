@@ -55,6 +55,7 @@ export default function RootLayout({
     <html lang="en" className={inter.variable} suppressHydrationWarning>
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="preload" as="video" href="/Video/showreel.mp4" type="video/mp4" />
       </head>
       <body>
         <Providers>

@@ -81,9 +81,9 @@ function ProjectItem({ work, onClick }: { work: (typeof works)[0], onClick?: () 
         style={{
           background: work.bg,
           y: bgY,
-          // Slightly taller than container to allow parallax movement without gaps
           height: "120%",
           top: "-10%",
+          willChange: "transform",
         }}
       >
         {work.videoUrl && isInView && (
@@ -98,14 +98,7 @@ function ProjectItem({ work, onClick }: { work: (typeof works)[0], onClick?: () 
           />
         )}
         
-        {/* Film grain noise over background/video */}
-        <div
-          className="absolute inset-0 opacity-[0.06] mix-blend-overlay pointer-events-none"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
-            backgroundSize: "200px 200px",
-          }}
-        />
+        {/* Removed redundant SVG noise layer to improve GPU performance during scroll */}
         
         {/* Cinematic dark overlay */}
         {work.videoUrl && (
@@ -116,7 +109,7 @@ function ProjectItem({ work, onClick }: { work: (typeof works)[0], onClick?: () 
       {/* Text — centered horizontally, positioned in upper-center area of the frame */}
       <motion.div
         className="absolute inset-0 flex flex-col items-center justify-center gap-4 z-10 transition-transform duration-700 ease-out group-hover:scale-105"
-        style={{ y: textY }}
+        style={{ y: textY, willChange: "transform" }}
       >
         <h3
           className="m-0 text-white text-center font-medium leading-none tracking-[-0.02em]"
