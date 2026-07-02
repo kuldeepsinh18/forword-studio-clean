@@ -70,10 +70,9 @@ export function FooterSection() {
               </span>
               <div className="flex flex-col gap-4 items-start text-left">
                 {[
-                  { label: 'Instagram ↗', href: 'https://instagram.com' },
-                  { label: 'WhatsApp ↗', href: 'https://whatsapp.com' },
-                  { label: 'Mail ↗', href: 'mailto:hello@forwardstudio.com' },
-                  { label: 'Behance ↗', href: 'https://behance.net' }
+                  { label: '88660 35771', href: 'https://wa.me/918866035771' },
+                  { label: 'frward_studio', href: 'https://instagram.com/frward_studio' },
+                  { label: 'zalahardip70@gmail.com', href: 'mailto:zalahardip70@gmail.com' }
                 ].map((link) => (
                   <a 
                     key={link.label} 
