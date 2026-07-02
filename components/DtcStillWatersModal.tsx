@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
+import { useModalHistory } from "../hooks/useModalHistory";
 import { CinematicVideo } from "./CinematicVideo";
 
 interface CampaignModalProps {
@@ -56,6 +57,8 @@ const itemVariants: Variants = {
 };
 
 export function DtcStillWatersModal({ isOpen, onClose }: CampaignModalProps) {
+  useModalHistory(isOpen, onClose);
+
   // Prevent background scrolling when modal is open
   useEffect(() => {
     if (isOpen) {

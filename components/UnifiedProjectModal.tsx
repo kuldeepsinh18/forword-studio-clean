@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
+import { useModalHistory } from "../hooks/useModalHistory";
 
 interface Project {
   id: string;
@@ -64,6 +65,9 @@ const itemVariants: Variants = {
 
 export function UnifiedProjectModal({ isOpen, onClose, project }: UnifiedProjectModalProps) {
   const [selectedMedia, setSelectedMedia] = useState<{ url: string; isVideo: boolean } | null>(null);
+
+  useModalHistory(isOpen, onClose);
+
   useEffect(() => {
     if (isOpen) {
       document.documentElement.style.overflow = "hidden";

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
+import { useModalHistory } from "../hooks/useModalHistory";
 
 interface CampaignModalProps {
   isOpen: boolean;
@@ -68,6 +69,9 @@ const allAssets = [
 
 export function RajAirCoolerModal({ isOpen, onClose }: CampaignModalProps) {
   const [selectedMedia, setSelectedMedia] = useState<{ url: string; isVideo: boolean } | null>(null);
+  
+  useModalHistory(isOpen, onClose);
+
   // Prevent background scrolling when modal is open
   useEffect(() => {
     if (isOpen) {

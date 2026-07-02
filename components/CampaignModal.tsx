@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
+import { useModalHistory } from "../hooks/useModalHistory";
 
 interface CampaignModalProps {
   isOpen: boolean;
@@ -65,6 +66,9 @@ const itemVariants: Variants = {
 
 export function CampaignModal({ isOpen, onClose }: CampaignModalProps) {
   const [selectedMedia, setSelectedMedia] = useState<{ url: string; isVideo: boolean } | null>(null);
+  
+  useModalHistory(isOpen, onClose);
+
   // Prevent body scrolling when modal is open
   useEffect(() => {
     if (isOpen) {
